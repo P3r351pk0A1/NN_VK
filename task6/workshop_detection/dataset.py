@@ -37,8 +37,14 @@ class DetectionDataset(torch.utils.data.Dataset):
             ymax = bbox[3] * h
             boxes.append([xmin, ymin, xmax, ymax])
         
-        boxes = np.asarray(boxes)  # N x 4
-        annot = np.zeros((len(boxes), 1))  # N x 1
+        boxes = np.asarray(boxes)  # may be shape (0,) if empty
+        # ensure boxes shape is (N,4)
+        if boxes.size == 0:
+            boxes = np.zeros((0, 4), dtype=np.float32)
+        else:
+            boxes = boxes.reshape(-1, 4).astype(np.float32)
+
+        annot = np.zeros((boxes.shape[0], 1), dtype=np.float32)  # N x 1
         annot = np.concatenate((boxes, annot), axis=1)  # N x 5
 
         sample = {'img': image, 'annot': annot}

@@ -1,0 +1,9 @@
+torch
+torchvision
+torchaudio
+opencv-python
+albumentations
+matplotlib
+tqdm
+pandas
+mean-average-precision
