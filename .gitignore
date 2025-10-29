@@ -58,3 +58,5 @@ lightning_logs/
 
 # Ignore test artifacts
 __MACOSX/
+
+task8/data/
